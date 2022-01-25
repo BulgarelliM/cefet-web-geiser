@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/BulgarelliM/cefet-web-geiser#readme",
   "dependencies": {
-    "express": "latest"
+    "express": "^4.17.2",
+    "hbs": "^4.2.0"
   }
 }
