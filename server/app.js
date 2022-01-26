@@ -3,7 +3,9 @@
 import express from 'express';
 import path from 'path';
 import fs from "fs";
+import Handlebars from "handlebars";
 import { fileURLToPath } from 'url';
+
 var app = express();
 
 
@@ -11,6 +13,7 @@ var app = express();
 const PORT = 3000;
 let db = {};
 const __filename = fileURLToPath(import.meta.url);
+const template = Handlebars.compile("steamid: {{steamid}}");
 
 // carregar "banco de dados" (data/jogadores.json e data/jogosPorJogador.json)
 // você pode colocar o conteúdo dos arquivos json no objeto "db" logo abaixo
@@ -34,7 +37,7 @@ app.set('views', 'server/views');
 // dados do banco de dados "data/jogadores.json" com a lista de jogadores
 // dica: o handler desta função é bem simples - basta passar para o template
 //       os dados do arquivo data/jogadores.json (~3 linhas)
-
+// Fonte: http://expressjs.com/en/4x/api.html#res.render
 app.get('/', function (req, res) {
   res.render('index', function (err, html) {
     res.send(html)
@@ -55,8 +58,6 @@ app.use(express.static(path.join(path.parse(path.dirname(__filename)).dir, '/cli
 
 // abrir servidor na porta 3000 (constante PORT)
 // dica: 1-3 linhas de código
-//C:\Users\maria\OneDrive\Documents\CEFET\WEB\web-tp-11\cefet-web-geiser
-//C:\Users\maria\OneDrive\Documents\CEFET\WEB\web-tp-11\cefet-web-geiser\client
 app.listen(PORT, function () {
   console.log("Ready");
 });
